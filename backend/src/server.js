@@ -6,9 +6,14 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const passportLocalMongoose = require("passport-local-mongoose");
+const path = require("path");
 const User = require("./models/user");
-//!NOTE USER routes
+
+//!NOTE routes import
 const userRoutes = require("./routes/user");
+const categoryRoutes = require("./routes/category");
+const productRoutes = require("./routes/product");
+const cartRoutes = require("./routes/cart");
 
 app.use(
   require("express-session")({
@@ -45,7 +50,14 @@ mongoose.connection.on("error", () => {
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/public/", express.static(path.join(__dirname, "uploads")));
+
+//!NOTE routes configuration
+
 app.use(userRoutes);
+app.use(categoryRoutes);
+app.use(productRoutes);
+app.use(cartRoutes);
 
 app.listen(process.env.PORT || 8000, () => {
   console.log(`Server is running at ${process.env.PORT}`);
