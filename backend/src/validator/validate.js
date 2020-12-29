@@ -14,7 +14,7 @@ exports.validateSignup = [
 ];
 
 exports.validateSignin = [
-  check("email").isEmail().withMessage("Valid email is required"),
+  check("username").notEmpty().withMessage("unique user name is required"),
   check("password")
     .isLength({ min: 6 })
     .withMessage("password with minimum length 6 is required"),

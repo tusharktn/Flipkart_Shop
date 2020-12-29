@@ -11,13 +11,8 @@ function Header() {
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="mr-auto">
-            {/* <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link> */}
-          </Nav>
+          <Nav className="mr-auto"></Nav>
           <Nav>
-            {/* <Nav.Link href="#signin">Signin</Nav.Link>
-            <Nav.Link href="#signup">Signup</Nav.Link> */}
             <li className="nav-item">
               <NavLink to="/signin" className="nav-link">
                 SignIn

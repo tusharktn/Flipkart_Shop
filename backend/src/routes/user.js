@@ -5,22 +5,27 @@ const passport = require("passport");
 const {
   isReqValidated,
   validateSignup,
-  validateSignin,
+  // validateSignin,
 } = require("../validator/validate");
 
 //!NOTE SIGNIN ROUTE
 router.post(
   "/signin",
-  validateSignin,
-  isReqValidated,
+  // validateSignin,
+  // isReqValidated,
   passport.authenticate("local"),
   (req, res) => {
-    User.find({ email: req.body.email }, (err, user) => {
+    User.find({ username: req.body.username }, (err, user) => {
       if (err) {
         console.log(err);
         return;
       }
-      res.send(user);
+      console.log(req.session);
+      const { _id, firstName, lastName, email, role, contactNumber } = req.user;
+      res.json({
+        User: { _id, firstName, lastName, email, role, contactNumber },
+      });
+      console.log(req.user);
     });
   }
 );
@@ -29,7 +34,6 @@ router.post(
 router.post("/signup", validateSignup, isReqValidated, async (req, res) => {
   User.findOne({ email: req.body.email }, async (err, user) => {
     if (err) console.log(err);
-    // console.log(req.body.email);
     if (user) {
       return res.json({ message: "user exists" });
     } else {
@@ -48,9 +52,22 @@ router.post("/signup", validateSignup, isReqValidated, async (req, res) => {
           username,
           contactNumber,
         });
-        const newUser = await User.register(_user, password);
-        console.log("user created");
-        res.send(newUser);
+        const newUser = await User.register(
+          _user,
+          password,
+          (err, createdUser) => {
+            if (err) {
+              // req.flash("error", err.message);
+              return res.redirect("/signin");
+            } else {
+              console.log("user created");
+              res.send(createdUser);
+              passport.authenticate("local")(req, res, function () {
+                res.redirect("/");
+              });
+            }
+          }
+        );
       } catch (error) {
         console.log(error);
       }
@@ -67,6 +84,7 @@ router.get("/logout", (req, res) => {
 
 module.exports = router;
 
+//NOTE demo code
 // router.post("/register",function(req,res){
 // 	User.register(new User({
 // 		username:req.body.username,

@@ -8,7 +8,7 @@ function Signup() {
     <>
       <Layout />
       <Container>
-        <Row style={{ marginTop: "50px" }}>
+        <Row style={{ marginTop: "30px" }}>
           <Col md={{ span: 6, offset: 3 }}>
             <Form>
               <Row>
@@ -19,7 +19,6 @@ function Signup() {
                     placeholder="Enter your first name"
                     value=""
                     onChange={() => {}}
-                    controlId="formBasicEmail"
                   />
                 </Col>
                 <Col md={6}>
@@ -28,20 +27,32 @@ function Signup() {
                     type="text"
                     placeholder="Enter your last name"
                     value=""
+                    onChange={() => {}}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col md={6}>
+                  <Input
+                    label="Username"
+                    type="text"
+                    placeholder="Username"
+                    value=""
+                    controlId="formBasicEmail"
+                    onChange={() => {}}
+                  />
+                </Col>
+                <Col md={6}>
+                  <Input
+                    label="Email address"
+                    type="email"
+                    placeholder="Enter email"
+                    value=""
                     controlId="formBasicEmail"
                     onChange={() => {}}
                   />
                 </Col>
               </Row>
-              <Input
-                label="Email address"
-                type="email"
-                placeholder="Enter email"
-                value=""
-                controlId="formBasicEmail"
-                onChange={() => {}}
-                errorMessage="We'll never share your email with anyone else."
-              />
               <Input
                 label="Password"
                 type="password"
