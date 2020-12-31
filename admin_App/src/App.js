@@ -1,24 +1,34 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Home from "./containers/home/Home";
 import Signin from "./containers/signin/Signin";
 import Signup from "./containers/signup/Signup";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PrivateRoute from "./components/higherComponents/PrivateRoute";
+import { useDispatch, useSelector } from "react-redux";
+import { isUserLoggedIn } from "./actions/";
+import Product from "./containers/products/Product";
+import Order from "./containers/orders/Order";
+import Category from "./containers/category/Category";
+
 function App() {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   useEffect(() => {
-    const user = JSON.parse(window.localStorage.getItem("user"));
-    if (user != null && user.isLoggedIn) {
-      setIsUserLoggedIn(true);
+    if (!auth.authenticate) {
+      dispatch(isUserLoggedIn());
     }
-  }, [isUserLoggedIn]);
+  }, [auth.authenticate, dispatch]);
+
   return (
     <div className="App">
-      <Router>
-        <Route path="/" exact component={Home} />
+      <Switch>
+        <PrivateRoute path="/" exact component={Home} />
+        <PrivateRoute path="/categories" component={Category} />
+        <PrivateRoute path="/products" component={Product} />
+        <PrivateRoute path="/orders" component={Order} />
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} />
-      </Router>
+      </Switch>
     </div>
   );
 }

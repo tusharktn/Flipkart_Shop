@@ -1,19 +1,21 @@
 import { authConstants } from "../actions/actionConstants";
 
 const initState = {
-  User: {
+  user: {
     firstName: "",
     email: "",
     lastName: "",
     username: "",
     conatctNumber: "",
   },
+  loading: false,
+  message: "",
   authenticate: false,
   authenticating: false,
+  logOut: true,
 };
 
 const authReducer = (state = initState, action) => {
-  console.log("Action -", action);
   switch (action.type) {
     case authConstants.LOGIN_REQUEST:
       state = {
@@ -24,11 +26,26 @@ const authReducer = (state = initState, action) => {
     case authConstants.LOGIN_SUCCESS:
       state = {
         ...state,
-        User: action.payload.User,
+        user: action.payload.User,
         authenticate: true,
         authenticating: false,
+        logOut: false,
       };
       break;
+    case authConstants.LOGOUT_SUCCESS:
+      state = {
+        ...initState,
+        message: action.payload.message,
+      };
+      break;
+    case authConstants.LOGOUT_REQUEST:
+      state = {
+        ...state,
+        logOut: true,
+        loading: true,
+      };
+      break;
+
     default:
       break;
   }

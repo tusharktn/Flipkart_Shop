@@ -52,22 +52,14 @@ router.post("/signup", validateSignup, isReqValidated, async (req, res) => {
           username,
           contactNumber,
         });
-        const newUser = await User.register(
-          _user,
-          password,
-          (err, createdUser) => {
-            if (err) {
-              // req.flash("error", err.message);
-              return res.redirect("/signin");
-            } else {
-              console.log("user created");
-              res.send(createdUser);
-              passport.authenticate("local")(req, res, function () {
-                res.redirect("/");
-              });
-            }
+        const newUser = await User.register(_user, password);
+
+        newUser.save((err, response) => {
+          if (err) {
+            return console.log(err);
           }
-        );
+          res.json({ message: "user created" });
+        });
       } catch (error) {
         console.log(error);
       }
@@ -79,7 +71,7 @@ router.post("/signup", validateSignup, isReqValidated, async (req, res) => {
 
 router.get("/logout", (req, res) => {
   req.logOut();
-  res.redirect("back");
+  res.json({ message: "See you later" });
 });
 
 module.exports = router;

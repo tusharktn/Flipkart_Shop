@@ -3,13 +3,15 @@ import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import Layout from "../../components/Layout";
 import Input from "../../components/Input";
 import { login } from "../../actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 function Signin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
   const userLogin = (e) => {
     e.preventDefault();
 
@@ -21,11 +23,9 @@ function Signin() {
     setUsername("");
     setPassword("");
   };
-  if (
-    window.localStorage.getItem("user") != null &&
-    window.localStorage.getItem("user").isLoggedIn === true
-  ) {
-    return <Redirect />;
+
+  if (auth.authenticate) {
+    return <Redirect to={`/`} />;
   }
   return (
     <>

@@ -84,7 +84,7 @@ router.get("/category", (req, res) => {
 
     const allCategories = getCategories(categories);
 
-    res.json({ allCategories });
+    res.json({ Categories: allCategories });
   });
 });
 
