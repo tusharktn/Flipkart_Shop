@@ -9,6 +9,7 @@ import { isUserLoggedIn } from "./actions/";
 import Product from "./containers/products/Product";
 import Order from "./containers/orders/Order";
 import Category from "./containers/category/Category";
+import { getAllCategories, getInitialData } from "./actions";
 
 function App() {
   const auth = useSelector((state) => state.auth);
@@ -17,6 +18,8 @@ function App() {
     if (!auth.authenticate) {
       dispatch(isUserLoggedIn());
     }
+
+    dispatch(getInitialData());
   }, [auth.authenticate, dispatch]);
 
   return (

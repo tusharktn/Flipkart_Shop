@@ -18,3 +18,26 @@ export const getAllCategories = () => {
     }
   };
 };
+
+export const addCategory = (form) => {
+  return async (dispatch) => {
+    dispatch({ type: categoryConstants.CREATE_CATEGORY_REQUEST });
+    const res = await axios.post(`/category/create`, form);
+
+    if (res.status === 200) {
+      dispatch({
+        type: categoryConstants.CREATE_CATEGORY_SUCCESS,
+        payload: {
+          createdCategory: res.data.createdCategory,
+        },
+      });
+    } else {
+      dispatch({
+        type: categoryConstants.CREATE_CATEGORIES_FAILURE,
+        payload: {
+          error: res.data.error,
+        },
+      });
+    }
+  };
+};

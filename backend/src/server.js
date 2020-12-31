@@ -15,6 +15,7 @@ const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
 const productRoutes = require("./routes/product");
 const cartRoutes = require("./routes/cart");
+const initialDataRoutes = require("./routes/adminRoutes/initialData");
 
 app.use(
   require("express-session")({
@@ -65,6 +66,7 @@ app.use(userRoutes);
 app.use(categoryRoutes);
 app.use(productRoutes);
 app.use(cartRoutes);
+app.use(initialDataRoutes);
 
 app.get("/", (req, res) => {
   console.log(req.user);

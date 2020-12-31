@@ -27,7 +27,6 @@ router.post("/category/create", upload.single("categoryImage"), (req, res) => {
       name: req.body.name,
       slug: slugify(req.body.name),
     };
-
     if (req.file) {
       categoryObj.categoryImage =
         process.env.IMAGE_API + "/public/" + req.file.filename;
@@ -42,7 +41,7 @@ router.post("/category/create", upload.single("categoryImage"), (req, res) => {
       if (err) {
         return res.send(err);
       }
-      res.send(newlyCreatedCategory);
+      res.json({ createdCategory: newlyCreatedCategory });
     });
   });
 });
@@ -68,6 +67,7 @@ function getCategories(categories, parentId = null) {
       _id: categoryItem._id,
       name: categoryItem.name,
       slug: categoryItem.slug,
+      parentId: categoryItem.parentId,
       children: getCategories(categories, categoryItem._id),
     });
   }

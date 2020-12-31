@@ -32,6 +32,7 @@ router.post("/product/create", upload.array("productPicture"), (req, res) => {
     price,
     slug: slugify(name),
     category,
+    productPictures,
   });
 
   newProduct.save((err, createdProduct) => {

@@ -29,34 +29,35 @@ function Signin() {
   }
   return (
     <>
-      <Layout />
-      <Container>
-        <Row style={{ marginTop: "40px" }}>
-          <Col md={{ span: 6, offset: 3 }}>
-            <Form onSubmit={userLogin}>
-              <Input
-                label="Username"
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <Input
-                label="Password"
-                type="password"
-                placeholder="Password"
-                value={password}
-                controlId="formBasicPassword"
-                onChange={(e) => setPassword(e.target.value)}
-              />
+      <Layout>
+        <Container>
+          <Row style={{ marginTop: "80px" }}>
+            <Col md={{ span: 6, offset: 3 }}>
+              <Form onSubmit={userLogin}>
+                <Input
+                  label="Username"
+                  type="text"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <Input
+                  label="Password"
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  controlId="formBasicPassword"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
 
-              <Button variant="primary" type="submit">
-                SignIn
-              </Button>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
+                <Button variant="primary" type="submit">
+                  SignIn
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+      </Layout>
     </>
   );
 }

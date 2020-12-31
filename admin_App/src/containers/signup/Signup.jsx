@@ -46,75 +46,76 @@ function Signup() {
 
   return (
     <>
-      <Layout />
-      <Container>
-        <Row style={{ marginTop: "30px" }}>
-          <Col md={{ span: 6, offset: 3 }}>
-            <Form onSubmit={register}>
-              <Row>
-                <Col md={6}>
-                  <Input
-                    label="First Name"
-                    type="text"
-                    placeholder="First name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
-                </Col>
-                <Col md={6}>
-                  <Input
-                    label="Last Name"
-                    type="text"
-                    placeholder="Last name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                  />
-                </Col>
-              </Row>
-              <Row>
-                <Col md={6}>
-                  <Input
-                    label="Username"
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </Col>
-                <Col md={6}>
-                  <Input
-                    label="Contact Number"
-                    type="tel"
-                    placeholder="Contact number"
-                    value={contactNumber}
-                    onChange={(e) => setContactNumber(e.target.value)}
-                  />
-                </Col>
-              </Row>
-              <Input
-                label="Email address"
-                type="email"
-                placeholder="Enter email"
-                value={email}
-                controlId="formBasicEmail"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Input
-                label="Password"
-                type="password"
-                placeholder="Password"
-                value={password}
-                controlId="formBasicPassword"
-                onChange={(e) => setPassword(e.target.value)}
-              />
+      <Layout>
+        <Container>
+          <Row style={{ marginTop: "80px" }}>
+            <Col md={{ span: 6, offset: 3 }}>
+              <Form onSubmit={register}>
+                <Row>
+                  <Col md={6}>
+                    <Input
+                      label="First Name"
+                      type="text"
+                      placeholder="First name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
+                  </Col>
+                  <Col md={6}>
+                    <Input
+                      label="Last Name"
+                      type="text"
+                      placeholder="Last name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={6}>
+                    <Input
+                      label="Username"
+                      type="text"
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </Col>
+                  <Col md={6}>
+                    <Input
+                      label="Contact Number"
+                      type="tel"
+                      placeholder="Contact number"
+                      value={contactNumber}
+                      onChange={(e) => setContactNumber(e.target.value)}
+                    />
+                  </Col>
+                </Row>
+                <Input
+                  label="Email address"
+                  type="email"
+                  placeholder="Enter email"
+                  value={email}
+                  controlId="formBasicEmail"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <Input
+                  label="Password"
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  controlId="formBasicPassword"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
 
-              <Button variant="primary" type="submit">
-                SignUp
-              </Button>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
+                <Button variant="primary" type="submit">
+                  SignUp
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+      </Layout>
     </>
   );
 }
